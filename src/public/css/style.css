@@ -1,0 +1,10 @@
+body {
+    background: #555;
+    color: #f3f3f3;
+}
+
+a:link,
+a:visited {
+    color: #eee;
+    text-decoration: underline;
+}

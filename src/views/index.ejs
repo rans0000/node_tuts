@@ -4,7 +4,16 @@
 
     <body>
         <%- include('partials/mainmenu.ejs') %>
-            <h1>Home</h1>
+            <h1>All Blogs</h1>
+
+            <% if (blogs.length > 0) { %>
+                <% blogs.forEach(blog => { %>
+                    <h4><%= blog.title %></h4>
+                    <i><%= blog.snippet %></i>
+                <% }) %>
+            <% } else { %>
+                <p>No contents yet...</p>
+            <% } %>
     </body>
 
 </html>

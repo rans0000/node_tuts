@@ -1,23 +1,58 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const Blog = require('./models/blog_model');
 
 const app = express();
+
+// const dbURI = 'mongodb+srv://rans0000:Admin%64123Admin@123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://rans0000:Admin%40123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(dbURI)
+.then(result=>{
+    console.log('connected to db...');
+    app.listen(3000);
+})
+.catch(error => console.log('error connecting db!'));
+
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
-app.listen(3000);
 
 app.use(express.static('./src/public'));
+
+// ---------------------------------------
+// app.get('/blog/create', (req,res)=>{
+//     const item = new Blog({
+//         title: 'We are one world',
+//         snippet: 'Yay partners!!',
+//         body: 'This resolved the issue for me. Thank you for helping community. If you are using any special character in your password you need to encode the particular character.'
+//     });
+//     item.save()
+//     .then(result => res.send(result))
+//     .catch(error => console.log(error));
+// });
+
+// ---------------------------------------
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Home' });
-    // res.sendFile('/views/index.html', { root: __dirname });
+    // res.render('index', { title: 'Home' });
+    res.redirect('/blogs');
 });
+
 app.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
-    // res.sendFile('/views/about.html', { root: __dirname });
 });
+
+app.get('/blogs', (req, res) => {
+    Blog.find().sort({createdAt: -1})
+    .then(result => {
+        res.render('index', {title: 'All Blogs', blogs: result});
+    })
+    .catch(error => console.log(error));
+    // res.render('create', { title: 'Create Blog' });
+});
+
 app.get('/blog/create', (req, res) => {
     res.render('create', { title: 'Create Blog' });
 });
+
 app.use((req, res) => {
     res.render('404', { title: '404' });
-    // res.status(404).sendFile('/views/404.html', { root: __dirname });
 });

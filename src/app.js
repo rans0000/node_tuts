@@ -7,15 +7,16 @@ const app = express();
 // const dbURI = 'mongodb+srv://rans0000:Admin%64123Admin@123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
 const dbURI = 'mongodb+srv://rans0000:Admin%40123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(dbURI)
-.then(result=>{
-    console.log('connected to db...');
-    app.listen(3000);
-})
-.catch(error => console.log('error connecting db!'));
+    .then(result => {
+        console.log('connected to db...');
+        app.listen(3000);
+    })
+    .catch(error => console.log('error connecting db!'));
 
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./src/public'));
 
 // ---------------------------------------
@@ -41,15 +42,21 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/blogs', (req, res) => {
-    Blog.find().sort({createdAt: -1})
-    .then(result => {
-        res.render('index', {title: 'All Blogs', blogs: result});
-    })
-    .catch(error => console.log(error));
-    // res.render('create', { title: 'Create Blog' });
+    Blog.find().sort({ createdAt: -1 })
+        .then(result => {
+            res.render('index', { title: 'All Blogs', blogs: result });
+        })
+        .catch(error => console.log(error));
 });
 
-app.get('/blog/create', (req, res) => {
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body);
+    blog.save()
+        .then(result => res.redirect('/blogs'))
+        .catch(error => console.log(error));
+});
+
+app.get('/blogs/create', (req, res) => {
     res.render('create', { title: 'Create Blog' });
 });
 

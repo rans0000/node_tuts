@@ -5,6 +5,12 @@
     <body>
         <%- include('partials/mainmenu.ejs') %>
             <h1>Create Blog</h1>
+            <form class="generic-form" action="/blogs" method="POST">
+                <label><span>Title</span><input type="text" name="title" /></label><br>
+                <label><span>Snippet</span><input type="text" name="snippet" /></label><br>
+                <label><span>Body</span><textarea name="body" rows="5" cols="40"></textarea></label><br>
+                <button type="submit">Post</button>
+            </form>
     </body>
 
 </html>

@@ -1,10 +1,29 @@
 body {
-    background: #555;
-    color: #f3f3f3;
+    background: #f3f3f3;
+    color: #333;
 }
 
 a:link,
 a:visited {
-    color: #eee;
+    color: #074c68;
     text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.blog-item {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.blog-item .title {
+    margin: 0;
+}
+
+.blog-item .snippet {
+    color: #888;
+    margin: 0;
 }

@@ -5,11 +5,13 @@
     <body>
         <%- include('partials/mainmenu.ejs') %>
             <h1>All Blogs</h1>
-
+            <br>
             <% if (blogs.length > 0) { %>
                 <% blogs.forEach(blog => { %>
-                    <h4><%= blog.title %></h4>
-                    <i><%= blog.snippet %></i>
+                    <div class="blog-item">
+                        <h4 class="title"><%= blog.title %></h4>
+                        <p class="snippet"><%= blog.snippet %></p>
+                    </div>
                 <% }) %>
             <% } else { %>
                 <p>No contents yet...</p>

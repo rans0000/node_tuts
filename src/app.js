@@ -27,7 +27,7 @@ app.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
 });
 
-app.use(blogRouter);
+app.use('/blogs', blogRouter);
 
 app.use((req, res) => {
     res.render('404', { title: '404' });

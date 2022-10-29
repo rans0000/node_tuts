@@ -22,14 +22,17 @@ const blogCreateGet = (req, res) => {
 };
 
 const blogDetails = (req, res) => {
-    const id = new mongoose.Types.ObjectId(req.params.id);
-    Blog.findById(id)
-        .then(result => {
-            res.render('blog/blog', { title: 'Blog item', blog: result });
-        })
-        .catch(error => {
-            console.log('error ', error);
-        });
+    try {
+        const id = new mongoose.Types.ObjectId(req.params.id);
+        Blog.findById(id)
+            .then(result => {
+                res.render('blog/blog', { title: 'Blog item', blog: result });
+            })
+    }
+    catch (error) {
+        console.error('-----blog details page error-----');
+        res.redirect('/404');
+    }
 };
 
 const blogDelete = (req, res) => {

@@ -6,16 +6,20 @@
         <%- include('partials/mainmenu.ejs') %>
             <h1>All Blogs</h1>
             <br>
-            <% if (blogs.length > 0) { %>
-                <% blogs.forEach(blog => { %>
-                    <div class="blog-item">
-                        <h4 class="title"><%= blog.title %></h4>
-                        <p class="snippet"><%= blog.snippet %></p>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>No contents yet...</p>
-            <% } %>
+            <% if (blogs.length> 0) { %>
+                <% blogs.forEach(blog=> { %>
+                    <a href="/blogs/<%= blog._id %>" class="blog-item">
+                        <h4 class="title">
+                            <%= blog.title %>
+                        </h4>
+                        <p class="snippet">
+                            <%= blog.snippet %>
+                        </p>
+                    </a>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No contents yet...</p>
+                            <% } %>
     </body>
 
 </html>

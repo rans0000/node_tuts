@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    title:{
+    title: {
         type: String,
         required: true
     },
-    snippet:{
+    snippet: {
         type: String,
         required: true,
     },
-    body:{
+    body: {
         type: String,
         required: true
     }
-},{timestamps: true});
+}, { timestamps: true });
 
 const Blog = mongoose.model('Blog', blogSchema);
 

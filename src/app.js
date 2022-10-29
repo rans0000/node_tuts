@@ -4,7 +4,6 @@ const Blog = require('./models/blog_model');
 
 const app = express();
 
-// const dbURI = 'mongodb+srv://rans0000:Admin%64123Admin@123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
 const dbURI = 'mongodb+srv://rans0000:Admin%40123@node-tuts.vy1f4p0.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(dbURI)
     .then(result => {
@@ -58,6 +57,15 @@ app.post('/blogs', (req, res) => {
 
 app.get('/blogs/create', (req, res) => {
     res.render('create', { title: 'Create Blog' });
+});
+
+app.get('/blogs/:id', (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    console.log('--id: ', id);
+    Blog.findById(id)
+        .then(result => {
+            res.render('blog', { title: 'Blog item', blog: result });
+        }).catch(error => console.log('error ', error));
 });
 
 app.use((req, res) => {

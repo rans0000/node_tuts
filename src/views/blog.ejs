@@ -14,7 +14,23 @@
                 <p class="body">
                     <%= blog.body %>
                 </p>
+                <button class="btn_delete" data-doc="<%=blog._id %>" type="button">Delete</button>
             </div>
     </body>
+    <script>
+        (function () {
+            const trash = document.querySelector('button.btn_delete');
+            trash.addEventListener('click', e => {
+                const endpoint = `/blogs/${trash.dataset.doc}`;
+
+                fetch(endpoint, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(result => {
+                        window.location.href = result.redirect;
+                    })
+                    .catch(err => console.log(err));
+            });
+        })();
+    </script>
 
 </html>

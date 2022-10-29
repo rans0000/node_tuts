@@ -68,6 +68,15 @@ app.get('/blogs/:id', (req, res) => {
         }).catch(error => console.log('error ', error));
 });
 
+app.delete('/blogs/:id', (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    Blog.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirect: '/blogs' });
+        })
+        .catch(error => console.log(error));
+});
+
 app.use((req, res) => {
     res.render('404', { title: '404' });
 });

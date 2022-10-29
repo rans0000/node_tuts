@@ -18,14 +18,14 @@ const blogCreatePost = (req, res) => {
 };
 
 const blogCreateGet = (req, res) => {
-    res.render('create', { title: 'Create Blog' });
+    res.render('blog/create', { title: 'Create Blog' });
 };
 
 const blogDetails = (req, res) => {
     const id = new mongoose.Types.ObjectId(req.params.id);
     Blog.findById(id)
         .then(result => {
-            res.render('blog', { title: 'Blog item', blog: result });
+            res.render('blog/blog', { title: 'Blog item', blog: result });
         })
         .catch(error => {
             console.log('error ', error);
